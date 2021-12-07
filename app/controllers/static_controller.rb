@@ -4,4 +4,7 @@ class StaticController < ApplicationController
 
   def privacy
   end
+
+  def too_soon
+  end
 end

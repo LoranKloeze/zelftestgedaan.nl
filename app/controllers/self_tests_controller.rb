@@ -12,16 +12,20 @@ class SelfTestsController < ApplicationController
 
   # GET /self_tests/new
   def new
+    redirect_to :too_soon and return if is_too_soon
     @self_test = SelfTest.new(done_at: Date.today)
   end
 
   # POST /self_tests or /self_tests.json
   def create
+    redirect_to :too_soon and return if is_too_soon
+
     @self_test = SelfTest.new(self_test_params)
     @self_test.reference = create_reference
 
     respond_to do |format|
       if @self_test.save
+        session[:last_test_inserted_at] = DateTime.now
         format.html { redirect_to thanks_path, notice: 'Self test was successfully created.' }
         format.json { render :show, status: :created, location: @self_test }
       else
@@ -30,6 +34,8 @@ class SelfTestsController < ApplicationController
       end
     end
   end
+
+  def already_done; end
 
   private
 
@@ -45,5 +51,9 @@ class SelfTestsController < ApplicationController
 
   def create_reference
     OpenSSL::HMAC.hexdigest(OpenSSL::Digest.new('sha256'), Rails.application.credentials.key, request.remote_ip)
+  end
+
+  def is_too_soon
+    session[:last_test_inserted_at].present? && (DateTime.now.to_i - DateTime.parse(session[:last_test_inserted_at]).to_i) < 500
   end
 end
