@@ -92,6 +92,7 @@ GEM
     ffi (1.15.4)
     globalid (1.0.0)
       activesupport (>= 5.0)
+    hiredis (0.6.3)
     htmlbeautifier (1.4.1)
     htmlentities (4.3.4)
     i18n (1.8.11)
@@ -230,6 +231,7 @@ DEPENDENCIES
   capybara (>= 3.26)
   caxlsx
   caxlsx_rails
+  hiredis
   htmlbeautifier
   jbuilder (~> 2.7)
   listen (~> 3.3)
