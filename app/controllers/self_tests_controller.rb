@@ -7,6 +7,7 @@ class SelfTestsController < ApplicationController
       SelfTest
       .select('done_at, COUNT(*) as total, COUNT(*) FILTER(WHERE is_positive = true) as total_positive')
       .group(:done_at)
+      .order(done_at: :desc)
   end
 
   # GET /self_tests/new
