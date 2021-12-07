@@ -17,7 +17,7 @@ class SelfTestsController < ApplicationController
 
     respond_to do |format|
       if @self_test.save
-        format.html { redirect_to @self_test, notice: 'Self test was successfully created.' }
+        format.html { redirect_to thanks_path, notice: 'Self test was successfully created.' }
         format.json { render :show, status: :created, location: @self_test }
       else
         format.html { render :new, status: :unprocessable_entity }

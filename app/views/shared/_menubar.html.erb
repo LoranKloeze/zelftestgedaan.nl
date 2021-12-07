@@ -7,13 +7,13 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Test gedaan</a>
+          <%= link_to 'Test gedaan', root_path, class: 'nav-link' %>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Resultaten</a>
+          <%= link_to 'Resultaten', self_tests_path, class: 'nav-link' %>
         </li>
-       </ul>
-       <ul class="navbar-nav mb-2 mb-lg-0">
+      </ul>
+      <ul class="navbar-nav mb-2 mb-lg-0">
         <li class="nav-item">
           <a class="nav-link active" target="_blank" href="https://twitter.com/LoranKloeze">@lorankloeze</a>
         </li>

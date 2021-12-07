@@ -3,14 +3,14 @@
     <div class="col-xs-12 col-lg-4">
       <h2>Wanneer</h2>
       <p>Op welke dag op heb je de zelftest hebt gedaan?</p>
-      <%= form.date_field :done_at, class: 'form-control' %>
+      <%= form.date_field :done_at, class: 'form-control', required: true %>
       <h2 class="mt-4">Uitslag</h2>
       <p>Wat was de uitslag van je zelftest?</p>
       </hr>
-      <input type="radio" class="btn-check" name="self_test[done_at]" id="option1" autocomplete="off">
+      <input type="radio" class="btn-check" name="self_test[done_at]" id="option1" autocomplete="off" required>
       <label class="btn btn-outline-success" for="option1">Negatief 😊</label>
 
-      <input type="radio" class="btn-check" name="self_test[done_at]" id="option2" autocomplete="off">
+      <input type="radio" class="btn-check" name="self_test[done_at]" id="option2" autocomplete="off" required>
       <label class="btn btn-outline-danger" for="option2">Positief 🤒</label>
       <hr/>
       <%= form.submit 'Verzenden', class: 'btn btn-lg btn-primary' %>
