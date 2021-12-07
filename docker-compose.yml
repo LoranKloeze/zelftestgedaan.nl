@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: library/postgres:11.9-alpine
+    restart: always
+    volumes:
+      - .docker/.psqlrc:/root/.psqlrc:ro
+      - postgres:/var/lib/postgresql/data
+      - ./log:/root/log:cached
+    ports:
+      - 5432:5432
+    environment:
+      - PSQL_HISTFILE=/root/log/.psql_history
+      - POSTGRES_HOST_AUTH_METHOD=trust
+      - POSTGRES_USER=${POSTGRES_USER:-postgres}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-postgres}
+    command: ["postgres", "-c", "log_statement=all"]
+
+volumes:
+  postgres:

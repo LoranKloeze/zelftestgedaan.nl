@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  done_at: 2021-12-07
+  is_positive: false
+  ip_reference: MyString
+
+two:
+  done_at: 2021-12-07
+  is_positive: false
+  ip_reference: MyString

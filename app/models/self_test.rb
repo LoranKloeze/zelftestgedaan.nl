@@ -1,0 +1,2 @@
+class SelfTest < ApplicationRecord
+end
