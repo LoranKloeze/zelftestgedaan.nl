@@ -1,5 +1,19 @@
-<h1>New Self Test</h1>
+<%= form_with(model: @self_test) do |form| %>
+  <div class="row">
+    <div class="col-xs-12 col-lg-4">
+      <h2>Wanneer</h2>
+      <p>Geef de dag op waarop je de test hebt gedaan</p>
+      <%= form.date_field :done_at, class: 'form-control' %>
+      <h2 class="mt-4">Uitslag</h2>
+      <p>Wat was de uitslag van je zelftest?</p>
+      <input type="radio" class="btn-check" name="options" id="option1" autocomplete="off" checked>
+      <label class="btn btn-outline-primary" for="option1">Negatief 😊</label>
 
-<%= render 'form', self_test: @self_test %>
+      <input type="radio" class="btn-check" name="options" id="option2" autocomplete="off">
+      <label class="btn btn-outline-primary" for="option2">Positief 🤒</label>
+      <hr/>
+      <%= form.submit 'Verzenden', class: 'btn btn-lg btn-primary' %>
+    </div>
 
-<%= link_to 'Back', self_tests_path %>
+  </div>
+<% end %>
