@@ -28,7 +28,8 @@ class SelfTestsController < ApplicationController
   end
 
   def fetch_reference
-    Rails.cache.fetch("#{request.remote_ip}/test_done", expires_in: 30.minutes) { SecureRandom.hex }
+    keep_ip_in_cache_for = 30.minutes
+    Rails.cache.fetch("#{request.remote_ip}/test_done", expires_in: keep_ip_in_cache_for) { SecureRandom.hex }
   end
 
   def guard_too_soon
@@ -36,7 +37,8 @@ class SelfTestsController < ApplicationController
   end
 
   def too_soon?
-    wait_for_seconds = 15.minutes.to_i
-    session[:last_test_inserted_at].present? && (DateTime.now.to_i - DateTime.parse(session[:last_test_inserted_at]).to_i) < wait_for_seconds
+    wait_for = 15.minutes
+    session[:last_test_inserted_at].present? &&
+      (DateTime.now.to_i - DateTime.parse(session[:last_test_inserted_at]).to_i) < wait_for.to_i
   end
 end
