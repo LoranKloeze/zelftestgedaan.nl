@@ -1,50 +1,28 @@
 class SelfTestsController < ApplicationController
-  before_action :set_self_test, only: %i[show edit update destroy]
+  before_action :guard_too_soon, only: %i[new create]
 
-  # GET /self_tests or /self_tests.json
   def index
-    @self_test_groups =
-      SelfTest
-      .select('done_at, COUNT(*) as total, COUNT(*) FILTER(WHERE is_positive = true) as total_positive')
-      .group(:done_at)
-      .order(done_at: :desc)
+    @self_test_groups = SelfTest.grouped_by_done
   end
 
-  # GET /self_tests/new
   def new
-    redirect_to :too_soon and return if is_too_soon
     @self_test = SelfTest.new(done_at: Date.today)
   end
 
-  # POST /self_tests or /self_tests.json
   def create
-    redirect_to :too_soon and return if is_too_soon
-
     @self_test = SelfTest.new(self_test_params)
     @self_test.reference = fetch_reference
 
-    respond_to do |format|
-      if @self_test.save
-        session[:last_test_inserted_at] = DateTime.now
-        format.html { redirect_to thanks_path, notice: 'Self test was successfully created.' }
-        format.json { render :show, status: :created, location: @self_test }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @self_test.errors, status: :unprocessable_entity }
-      end
+    if @self_test.save
+      session[:last_test_inserted_at] = DateTime.now
+      redirect_to thanks_path
+    else
+      raise 'We got very weird self test params, fail hard and let the 1337 skid figure it out'
     end
   end
 
-  def already_done; end
-
   private
 
-  # Use callbacks to share common setup or constraints between actions.
-  def set_self_test
-    @self_test = SelfTest.find(params[:id])
-  end
-
-  # Only allow a list of trusted parameters through.
   def self_test_params
     params.require(:self_test).permit(:done_at, :is_positive)
   end
@@ -53,7 +31,12 @@ class SelfTestsController < ApplicationController
     Rails.cache.fetch("#{request.remote_ip}/test_done", expires_in: 30.minutes) { SecureRandom.hex }
   end
 
-  def is_too_soon
-    session[:last_test_inserted_at].present? && (DateTime.now.to_i - DateTime.parse(session[:last_test_inserted_at]).to_i) < 900
+  def guard_too_soon
+    redirect_to :too_soon if too_soon?
+  end
+
+  def too_soon?
+    wait_for_seconds = 15.minutes.to_i
+    session[:last_test_inserted_at].present? && (DateTime.now.to_i - DateTime.parse(session[:last_test_inserted_at]).to_i) < wait_for_seconds
   end
 end
