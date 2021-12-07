@@ -7,10 +7,10 @@
       <h2 class="mt-4">Uitslag</h2>
       <p>Wat was de uitslag van je zelftest?</p>
       </hr>
-      <input type="radio" class="btn-check" name="self_test[is_positive]" id="option1" autocomplete="off" required>
+      <input type="radio" class="btn-check" name="self_test[is_positive]" id="option1" value="false" autocomplete="off" required>
       <label class="btn btn-outline-success" for="option1">Negatief 😊</label>
 
-      <input type="radio" class="btn-check" name="self_test[is_positive]" id="option2" autocomplete="off" required>
+      <input type="radio" class="btn-check" name="self_test[is_positive]" id="option2" value="true" autocomplete="off" required>
       <label class="btn btn-outline-danger" for="option2">Positief 🤒</label>
       <hr/>
       <%= form.submit 'Verzenden', class: 'btn btn-lg btn-primary' %>
