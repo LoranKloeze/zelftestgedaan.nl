@@ -1,0 +1,8 @@
+wb = xlsx_package.workbook
+wb.add_worksheet(name: 'Resultaten') do |sheet|
+  sheet.add_row ['Datum', 'Ingediend', 'Positief', '% Positief']
+  @self_test_groups.each do |self_test_group|
+    sheet.add_row [self_test_group.done_at, self_test_group.total, self_test_group.total_positive,
+                   self_test_group.total_positive / self_test_group.total.to_f]
+  end
+end

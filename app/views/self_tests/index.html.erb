@@ -1,31 +1,29 @@
 <p id="notice"><%= notice %></p>
+<h1>Resultaten ingediende zelftestuitslagen</h1>
+<%= link_to 'Excel downloaden', self_tests_path(format: :xlsx) %>
+<%= link_to 'JSON downloaden', self_tests_path(format: :json) %>
+<div class="row">
+  <div class="col-xs-12 col-lg-6">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Datum</th>
+          <th class='text-end'>Ingediend</th>
+          <th class='text-end'>Positief</th>
+          <th class='text-end'>% Positief</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @self_test_groups.each do |self_test_group| %>
+          <tr>
+            <td class='text-end'><%= l(self_test_group.done_at, format: :default_day ) %></td>
+            <td class='text-end'><%= self_test_group.total %></td>
+            <td class='text-end'><%= self_test_group.total_positive %></td>
+            <td class='text-end'><%= number_with_precision(self_test_group.total_positive / self_test_group.total.to_f * 100, precision: 1) %>%</td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 
-<h1>Self Tests</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Done at</th>
-      <th>Is positive</th>
-      <th>Ip reference</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @self_tests.each do |self_test| %>
-      <tr>
-        <td><%= self_test.done_at %></td>
-        <td><%= self_test.is_positive %></td>
-        <td><%= self_test.ip_reference %></td>
-        <td><%= link_to 'Show', self_test %></td>
-        <td><%= link_to 'Edit', edit_self_test_path(self_test) %></td>
-        <td><%= link_to 'Destroy', self_test, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Self Test', new_self_test_path %>
+</div>

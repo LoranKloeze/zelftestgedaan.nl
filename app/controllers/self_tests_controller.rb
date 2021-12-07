@@ -3,7 +3,10 @@ class SelfTestsController < ApplicationController
 
   # GET /self_tests or /self_tests.json
   def index
-    @self_tests = SelfTest.all
+    @self_test_groups =
+      SelfTest
+      .select('done_at, COUNT(*) as total, COUNT(*) FILTER(WHERE is_positive = true) as total_positive')
+      .group(:done_at)
   end
 
   # GET /self_tests/new
