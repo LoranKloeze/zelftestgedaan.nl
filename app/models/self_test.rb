@@ -1,5 +1,7 @@
 class SelfTest < ApplicationRecord
+
   validate :done_at_date_cannot_be_in_the_future, :done_at_date_cannot_be_far_in_the_past
+  validates :done_at, presence: true
 
   def done_at_date_cannot_be_in_the_future
     if done_at.present? && done_at > Date.today
