@@ -21,7 +21,7 @@ class SelfTestsController < ApplicationController
     redirect_to :too_soon and return if is_too_soon
 
     @self_test = SelfTest.new(self_test_params)
-    @self_test.reference = create_reference
+    @self_test.reference = fetch_reference
 
     respond_to do |format|
       if @self_test.save
@@ -49,8 +49,8 @@ class SelfTestsController < ApplicationController
     params.require(:self_test).permit(:done_at, :is_positive)
   end
 
-  def create_reference
-    OpenSSL::HMAC.hexdigest(OpenSSL::Digest.new('sha256'), Rails.application.credentials.key, request.remote_ip)
+  def fetch_reference
+    Rails.cache.fetch("#{request.remote_ip}/test_done", expires_in: 30.minutes) { SecureRandom.hex }
   end
 
   def is_too_soon
