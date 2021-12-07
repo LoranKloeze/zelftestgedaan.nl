@@ -3,7 +3,7 @@
     <div class="col-xs-12 col-lg-4">
       <h2>Wanneer</h2>
       <p>Op welke dag op heb je de zelftest hebt gedaan?</p>
-      <%= form.date_field :done_at, class: 'form-control', required: true, max: Date.today %>
+      <%= form.date_field :done_at, class: 'form-control', required: true, max: Date.today, min: Date.today - 1.month %>
       <h2 class="mt-4">Uitslag</h2>
       <p>Wat was de uitslag van je zelftest?</p>
       </hr>
