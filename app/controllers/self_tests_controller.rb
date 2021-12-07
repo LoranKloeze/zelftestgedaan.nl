@@ -54,6 +54,6 @@ class SelfTestsController < ApplicationController
   end
 
   def is_too_soon
-    session[:last_test_inserted_at].present? && (DateTime.now.to_i - DateTime.parse(session[:last_test_inserted_at]).to_i) < 500
+    session[:last_test_inserted_at].present? && (DateTime.now.to_i - DateTime.parse(session[:last_test_inserted_at]).to_i) < 1800
   end
 end
