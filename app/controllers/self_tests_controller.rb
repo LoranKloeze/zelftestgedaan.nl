@@ -17,6 +17,7 @@ class SelfTestsController < ApplicationController
   # POST /self_tests or /self_tests.json
   def create
     @self_test = SelfTest.new(self_test_params)
+    @self_test.reference = create_reference
 
     respond_to do |format|
       if @self_test.save
@@ -38,6 +39,10 @@ class SelfTestsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def self_test_params
-    params.require(:self_test).permit(:done_at, :is_positive, :ip_reference)
+    params.require(:self_test).permit(:done_at, :is_positive)
+  end
+
+  def create_reference
+    OpenSSL::HMAC.hexdigest(OpenSSL::Digest.new('sha256'), Rails.application.credentials.key, request.remote_ip)
   end
 end

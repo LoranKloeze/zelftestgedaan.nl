@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_07_065018) do
+ActiveRecord::Schema.define(version: 2021_12_07_093309) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,12 +18,12 @@ ActiveRecord::Schema.define(version: 2021_12_07_065018) do
   create_table "self_tests", force: :cascade do |t|
     t.date "done_at"
     t.boolean "is_positive"
-    t.string "ip_reference"
+    t.string "reference"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["done_at"], name: "index_self_tests_on_done_at"
-    t.index ["ip_reference"], name: "index_self_tests_on_ip_reference"
     t.index ["is_positive"], name: "index_self_tests_on_is_positive"
+    t.index ["reference"], name: "index_self_tests_on_reference"
   end
 
 end
