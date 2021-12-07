@@ -3,9 +3,9 @@
 one:
   done_at: 2021-12-07
   is_positive: false
-  ip_reference: MyString
+  reference: MyString
 
 two:
   done_at: 2021-12-07
   is_positive: false
-  ip_reference: MyString
+  reference: MyString
