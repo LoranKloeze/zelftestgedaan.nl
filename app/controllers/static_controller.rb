@@ -7,4 +7,8 @@ class StaticController < ApplicationController
 
   def too_soon
   end
+
+  def fake_exception
+    raise "This is a fake exception"
+  end
 end
