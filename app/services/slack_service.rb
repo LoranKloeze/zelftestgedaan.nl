@@ -11,7 +11,7 @@ class SlackService
     end
 
     def webhook_url
-      Rails.application.credentials.dig(:slack, :webhook_url)
+      Rails.application.credentials.dig(:slack, :notes_webhook_url)
     end
   end
 end
