@@ -41,7 +41,7 @@ class Rack::Attack
   #
   # Key: "rack::attack:#{Time.now.to_i/:period}:logins/ip:#{req.ip}"
   throttle('new_self_tests/ip', limit: 2, period: 5.minutes) do |req|
-    if req.path == '/self_test' && req.post?
+    if req.path == '/self_tests' && req.post?
       req.ip
     end
   end
