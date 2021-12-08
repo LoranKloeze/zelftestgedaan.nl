@@ -40,7 +40,7 @@ class Rack::Attack
   # Throttle POST requests to /login by IP address
   #
   # Key: "rack::attack:#{Time.now.to_i/:period}:logins/ip:#{req.ip}"
-  throttle('new_self_tests/ip', limit: 2, period: 5.minutes) do |req|
+  throttle('new_self_tests/ip', limit: 4, period: 5.minutes) do |req|
     if req.path == '/self_tests' && req.post?
       req.ip
     end
