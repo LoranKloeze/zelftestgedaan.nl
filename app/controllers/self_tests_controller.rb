@@ -37,7 +37,7 @@ class SelfTestsController < ApplicationController
   end
 
   def too_soon?
-    wait_for = 15.minutes
+    wait_for = 5.minutes
     session[:last_test_inserted_at].present? &&
       (DateTime.now.to_i - DateTime.parse(session[:last_test_inserted_at]).to_i) < wait_for.to_i
   end
