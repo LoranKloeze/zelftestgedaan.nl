@@ -1,8 +1,9 @@
 # To keep our promises around privacy, we have to remove
 # the hostname from ExceptionNotifier, doing it here
 #
-# TODO: Monkey patching is like blockchain: don't every use it
-#       unless you absolutely no other choice. So refactor this.
+# TODO: Monkey patching is like blockchain: don't ever use it
+#       unless you absolutely have no other choice. So refactor 
+#       this.
 #
 module ExceptionNotifier
   class SlackNotifier
