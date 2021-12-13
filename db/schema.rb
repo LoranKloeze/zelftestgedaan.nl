@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_07_093309) do
+ActiveRecord::Schema.define(version: 2021_12_13_155731) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,14 @@ ActiveRecord::Schema.define(version: 2021_12_07_093309) do
     t.index ["done_at"], name: "index_self_tests_on_done_at"
     t.index ["is_positive"], name: "index_self_tests_on_is_positive"
     t.index ["reference"], name: "index_self_tests_on_reference"
+  end
+
+  create_table "settings", force: :cascade do |t|
+    t.string "var", null: false
+    t.text "value"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["var"], name: "index_settings_on_var", unique: true
   end
 
 end
