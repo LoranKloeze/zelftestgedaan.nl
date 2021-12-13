@@ -1,5 +1,5 @@
 class SelfTestsController < ApplicationController
-  before_action :guard_too_soon, only: %i[new create]
+  before_action :guard_wait, only: %i[new create]
 
   def index
     @self_test_groups = SelfTest.grouped_by_done
@@ -15,10 +15,16 @@ class SelfTestsController < ApplicationController
 
     if @self_test.save
       session[:last_test_inserted_at] = DateTime.now
+      increment_tests_submitted
       redirect_to thanks_path
     else
       raise 'We got very weird self test params, fail hard and let the 1337 skid figure it out'
     end
+  end
+
+  def wait
+    @tests_interval = Setting.new_tests_interval / 1.minutes
+    @tests_limit = Setting.tests_limit_per_request
   end
 
   private
@@ -32,13 +38,26 @@ class SelfTestsController < ApplicationController
     Rails.cache.fetch("#{request.remote_ip}/test_done", expires_in: keep_ip_in_cache_for) { SecureRandom.hex }
   end
 
-  def guard_too_soon
-    redirect_to :too_soon if too_soon?
+  def guard_wait
+    redirect_to :wait_self_tests if limit_reached?
   end
 
-  def too_soon?
-    wait_for = 5.minutes
-    session[:last_test_inserted_at].present? &&
-      (DateTime.now.to_i - DateTime.parse(session[:last_test_inserted_at]).to_i) < wait_for.to_i
+  def limit_reached?
+    session[:tests_submitted] = 0 and return false if may_clear_limit? || session[:tests_submitted].blank?
+
+    session[:tests_submitted] >= Setting.tests_limit_per_request
+  end
+
+  def increment_tests_submitted
+    session[:tests_submitted] ||= 0
+    session[:tests_submitted] += 1
+  end
+
+  def may_clear_limit?
+    return true if session[:last_test_inserted_at].blank?
+
+    passed_since_last_test = (DateTime.now.to_i - DateTime.parse(session[:last_test_inserted_at]).to_i)
+
+    passed_since_last_test > Setting.new_tests_interval.to_i
   end
 end
