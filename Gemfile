@@ -25,6 +25,7 @@ gem 'redis', '~> 4.0'
 gem 'hiredis'
 gem 'exception_notification'
 gem 'slack-notifier'
+gem 'rails-settings-cached'
 # Use Redis adapter to run Action Cable in production
 # Use Active Model has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

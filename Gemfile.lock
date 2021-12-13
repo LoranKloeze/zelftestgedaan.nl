@@ -161,6 +161,8 @@ GEM
       nokogiri (>= 1.6)
     rails-html-sanitizer (1.4.2)
       loofah (~> 2.3)
+    rails-settings-cached (2.8.1)
+      rails (>= 5.0.0)
     railties (6.1.4.1)
       actionpack (= 6.1.4.1)
       activesupport (= 6.1.4.1)
@@ -249,6 +251,7 @@ DEPENDENCIES
   rack-attack
   rack-mini-profiler (~> 2.0)
   rails (~> 6.1.4, >= 6.1.4.1)
+  rails-settings-cached
   redis (~> 4.0)
   sass-rails (>= 6)
   selenium-webdriver
