@@ -94,6 +94,8 @@ GEM
       actionmailer (>= 4.0, < 7)
       activesupport (>= 4.0, < 7)
     ffi (1.15.4)
+    font-awesome-rails (4.7.0.7)
+      railties (>= 3.2, < 7)
     globalid (1.0.0)
       activesupport (>= 5.0)
     hiredis (0.6.3)
@@ -241,6 +243,7 @@ DEPENDENCIES
   caxlsx
   caxlsx_rails
   exception_notification
+  font-awesome-rails
   hiredis
   htmlbeautifier
   jbuilder (~> 2.7)

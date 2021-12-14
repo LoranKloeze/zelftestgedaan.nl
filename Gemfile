@@ -16,16 +16,17 @@ gem 'webpacker', '~> 5.0'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.7'
+gem 'awesome_print'
 gem 'caxlsx'
 gem 'caxlsx_rails'
-gem 'awesome_print'
-gem 'rack-attack'
-gem 'redis', '~> 4.0'
-gem 'hiredis'
 gem 'exception_notification'
-gem 'slack-notifier'
+gem 'font-awesome-rails'
+gem 'hiredis'
+gem 'jbuilder', '~> 2.7'
+gem 'rack-attack'
 gem 'rails-settings-cached'
+gem 'redis', '~> 4.0'
+gem 'slack-notifier'
 # Use Redis adapter to run Action Cable in production
 # Use Active Model has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
