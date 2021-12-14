@@ -18,7 +18,12 @@
       </ul>
       <ul class="navbar-nav mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" target="_blank" href="https://twitter.com/LoranKloeze">@lorankloeze</a>
+          <%= link_to '@lorankloeze', "https://twitter.com/LoranKloeze", class: 'nav-link', target: '_blank' %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "https://github.com/LoranKloeze/zelftestgedaan.nl", class: 'nav-link', title: 'Broncode', target: '_blank' do %>
+            <%= fa_icon 'code-branch' %>
+          <% end %>
         </li>
       </ul>
     </div>
