@@ -16,7 +16,7 @@ class SelfTestsController < ApplicationController
     if @self_test.save
       session[:last_test_inserted_at] = DateTime.now
       increment_tests_submitted
-      redirect_to thanks_path
+      redirect_to thanks_path(is_positive: @self_test.is_positive)
     else
       raise 'We got very weird self test params, fail hard and let the 1337 skid figure it out'
     end

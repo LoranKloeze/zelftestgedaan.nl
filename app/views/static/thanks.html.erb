@@ -1,3 +1,11 @@
-<h1>Bedankt! ❤️</h1>
-<p>Met jouw zelftestuitslag helpen we elkaar om inzicht te krijgen. Hartelijk dank!</p>
+<h1>❤Bedankt! ️</h1>
+<p>Met jouw zelftestuitslag helpen we elkaar om inzicht te krijgen. Hartelijk dank!<br/>
 <%= link_to 'Naar resultaten >', self_tests_path %>
+</p>
+
+<% if @is_positive %>
+<h1 class="mt-3">⚠️Let op!</h1>
+<p>Je hebt opgegeven dat je testuitslag <b>positief</b> is. 
+Maak daarom <%= link_to 'hier', 'https://www.rijksoverheid.nl/onderwerpen/coronavirus-covid-19/testen/afspraak-maken', target: '_blank' %> een 
+afspraak bij de GGD om je daar ook te laten testen.</p>
+<% end %>
